@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
+import AddButton from '../components/AddButton';
 import NotePage from './NotePage';
 import { Link } from 'react-router-dom';
-
 const NotesListPage = () => {
 
   let [notes, setNotes] = useState([]);
@@ -30,6 +30,7 @@ const NotesListPage = () => {
         <ListItem key={index} note = {note} />
       ))}
         </div>
+        <AddButton />
       </div>
   );
 };

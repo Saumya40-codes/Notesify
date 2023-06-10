@@ -191,6 +191,12 @@ a {
   justify-content: center;
   cursor: pointer;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, box-shadow 0.2s ;
+}
+
+.floating-button:hover {
+  background-color: var(--color-dark);
+  box-shadow: 6px 6px 9px rgba(255, 5, 5, 0.2);
 }
 
 
