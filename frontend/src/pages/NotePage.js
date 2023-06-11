@@ -18,7 +18,8 @@ const NotePage = () => {
     const response = await fetch(`/api/notes/${id}`);
     const data = await response.json();
     setNote(data);
-    const noteTitle = String(data.body).split('\n')[0];
+    let noteTitle = String(data.body).substring(0, 15);
+    if(data.body.length > 15) noteTitle += '...';
     setTitle(noteTitle);
   };
 
@@ -42,16 +43,20 @@ const NotePage = () => {
     })
 }
 
-  let handleSubmit = () => {
-    if (id !== 'new' && note.body == '') {
-        deleteNote()
-    } else if (id !== 'new') {
-        updateNote()
-    } else if (id === 'new' && note.body !== null) {
-        createNote()
-    }
-    navigate('/')
-}
+const handleSubmit = async () => {  
+  if(id !== 'new' && note.body === ''){
+    setTitle('No Title');
+    await updateNote();
+  }
+  else if (id !== 'new') {
+    updateNote();
+  }
+  else if (id === 'new' && note != null) {
+    createNote();
+  }
+  navigate('/');
+};
+
 
   const deleteNote = async () => {
     await fetch(`/api/notes/${note.id}/delete`, {

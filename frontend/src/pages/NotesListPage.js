@@ -26,7 +26,7 @@ const NotesListPage = () => {
       
       <div className='notes-list'>
       {notes.map((note, index) => (
-        <ListItem key={index} note = {note} />
+        <ListItem key={index} note = {note} updated = { note.updated } />
       ))}
         </div>
         <AddButton />

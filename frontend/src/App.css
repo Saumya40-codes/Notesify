@@ -128,6 +128,30 @@ a {
   color: var(--color-gray);
 }
 
+.lst-note {
+  background: linear-gradient(to right, #ff0000, #00ff00); /* Replace with your desired gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.lst-note span {
+  display: inline-block;
+  animation: colorAnimation 4s infinite; /* Adjust the duration as needed */
+}
+
+@keyframes colorAnimation {
+  0% {
+    color: rgb(255, 89, 0); 
+  }
+  50% {
+    color: rgb(255, 0, 247);
+  }
+  100% {
+    color: rgb(10, 150, 113);
+  }
+}
+
 
 .notes-list {
   padding: 0;
@@ -196,7 +220,7 @@ a {
 
 .floating-button:hover {
   background-color: var(--color-dark);
-  box-shadow: 6px 6px 9px rgba(255, 5, 5, 0.2);
+  box-shadow: 6px 6px 9px 6px rgba(233, 3, 3, 0.2);
 }
 
 
