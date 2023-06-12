@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import AddFontNames from '../components/AddFontNames';
 
 const NotePage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [note, setNote] = useState({ body: '' });
+  const [note, setNote] = useState({ body: '', font: 'Arial' });
   const [title, setTitle] = useState('');
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const NotePage = () => {
   };
 
   const updateNote = async () => {
-    await fetch(`/api/notes/${id}/update`, {
+    await fetch(`/api/notes/${id}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const NotePage = () => {
   };
 
   let createNote = async () => {
-    fetch(`/api/notes/create/`, {
+    fetch(`/api/notes/`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +60,7 @@ const handleSubmit = async () => {
 
 
   const deleteNote = async () => {
-    await fetch(`/api/notes/${note.id}/delete`, {
+    await fetch(`/api/notes/${note.id}/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -68,6 +69,7 @@ const handleSubmit = async () => {
     });
     navigate('/');
   };
+  
 
   return (
     <div className="note" >
@@ -76,15 +78,19 @@ const handleSubmit = async () => {
           <a onClick={handleSubmit}> &#x2B05; </a>
         </h3>
 
-        {title === '' ? 'No Title' : title}
+         {title === '' ? 'No Title' : title}
             {id !== 'new' ? (
                 <button onClick={deleteNote}>Delete</button>
             ) : (
                 <button onClick={handleSubmit}>Add</button>
             )}
-
         </div>
-        <textarea defaultValue={note?.body} onChange={(e) => setNote({ ...note, 'body': e.target.value })}></textarea>
+        <AddFontNames note={note} setNote={setNote} className='font-style' />
+        <textarea
+        defaultValue={note?.body}
+        onChange={(e) => setNote({ ...note, body: e.target.value })}
+        style={{ fontFamily: note.font }}
+      ></textarea>
     </div>
 )
 }

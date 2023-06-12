@@ -130,8 +130,8 @@ a {
 
 .lst-note {
   background: linear-gradient(to right, #ff0000, #00ff00); /* Replace with your desired gradient */
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
@@ -282,4 +282,32 @@ a {
 
 .note textarea::-webkit-scrollbar {
   display: none;
+}
+
+
+/* FONT STYLES */
+
+.font-style{
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+}
+
+.sel{
+  background: #252629;
+  width: 100px;
+}
+
+.sel option{
+  color:#f68657;
+}
+/* Custom title */
+
+.title{
+  border: none;
+  background: #2e3235;
+}
+
+.title:hover{
+  border: none;
 }
