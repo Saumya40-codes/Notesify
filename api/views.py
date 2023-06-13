@@ -1,10 +1,19 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import NoteSerializer
-from .models import Note
+from .serializers import NoteSerializer,LoginSerializer
+from .models import Note, Login
+from django.contrib.auth import authenticate, login as login_dj
+
+from django.contrib.auth.decorators import login_required
 
 from .utils import updateNote, deleteNote, getNoteList, getNotesList, createNote
+
+
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 # Create your views here.
 @api_view(['GET'])
 def getRoutes(request):
@@ -64,27 +73,16 @@ def getNote(request, pk):
         return deleteNote (request,pk)
 
 
-# for ref
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
 
-# @api_view(['PUT'])
-# def UpdateNote(request,pk):
-#     notes = Note.objects.get(id=pk)
-#     serializers = NoteSerializer(instance=notes, data=request.data)
-#     if serializers.is_valid():
-#         serializers.save()
-#     return Response(serializers.data)
+        # Add custom claims
+        token['username'] = user.username
+        return token
 
-# @api_view(['DELETE'])
-# def DeleteNote (request,pk):
-#     notes = Note.objects.get(id=pk)
-#     notes.delete()
-#     return Response('Note was deleted')
+# so that we can use our custom serializer -> in this case MyTokenObtainPairSerializer
 
-# @api_view(['POST'])
-# def CreateNote (request):
-#     data  = request.data
-#     notes = Note.objects.create(
-#         body = data['body']
-#     )
-#     serializers = NoteSerializer(notes, many = False)
-#     return Response(serializers.data)
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

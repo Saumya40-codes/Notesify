@@ -8,3 +8,12 @@ class Note(models.Model):
 
     def __str__(self):
         return self.body[:50]
+    
+
+class Login(models.Model):
+    username = models.CharField(max_length=200, null=True, blank=True)
+    password = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.username
+    
