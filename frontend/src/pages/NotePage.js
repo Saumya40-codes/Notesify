@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import AddFontNames from '../components/AddFontNames';
+import AuthContext from '../context/AuthContext';
 
 const NotePage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [note, setNote] = useState({ body: '', font: 'Arial' });
   const [title, setTitle] = useState('');
+  const {authTokens} = useContext(AuthContext);
 
   useEffect(() => {
     if (id !== 'new') {
@@ -38,7 +40,8 @@ const NotePage = () => {
     fetch(`/api/notes/`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authTokens.access}`
         },
         body: JSON.stringify(note)
     })

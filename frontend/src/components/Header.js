@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 const Header = () => {
+  let {user} = useContext(AuthContext);
+  let {logout} = useContext(AuthContext);
   useEffect(() => {
     const text = document.querySelector('.lst-note');
     const textContent = text.textContent;
@@ -20,6 +23,12 @@ const Header = () => {
       <h1>
         <span className='lst-note'>Note List</span>
       </h1>
+      {user? (
+        <p onClick={logout}>Logout</p>
+      ):(
+        <p>Login</p>
+      )}
+      <p>Hello {user &&   user.username}</p>
     </div>
   );
 };

@@ -1,21 +1,28 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import {AuthProvider} from './context/AuthContext';
+
 import Header from './components/Header';
 import NotesListPage from './pages/NotesListPage';
 import NotePage from './pages/NotePage';
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './utils/PrivateRoute';
+
 
 function App() {
   return (
     <Router>
-    <div className="container dark">
-      <div className="app">
-    <Header />
-    <Routes>
-    <Route path='/' exact Component={NotesListPage} />
-    <Route path='/note/:id' Component={NotePage} />
-    </Routes>
+      <AuthProvider>
+      <div className="container dark">
+        <div className="app">
+            <Header /> 
+              <PrivateRoute path="/login" Component= {LoginPage} />
+              <PrivateRoute path="/note/:id" Component = {NotePage} />
+              <PrivateRoute path="/" Component={NotesListPage} />
+        </div>
       </div>
-    </div>
+      </AuthProvider>
     </Router>
   );
 }
