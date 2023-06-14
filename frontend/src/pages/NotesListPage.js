@@ -8,7 +8,7 @@ import AuthContext from '../context/AuthContext';
 const NotesListPage = () => {
   const { user } = useContext(AuthContext);
   const [notes, setNotes] = useState([]);
-  const {authTokens, logoutUser} = useContext(AuthContext);
+  const {authTokens, logout} = useContext(AuthContext);
 
   useEffect(() => {
     getNotes();
@@ -26,7 +26,7 @@ const NotesListPage = () => {
       if(resp.status === 200){
         setNotes(data);
       }else if(resp.statusText === 'Unauthorized'){
-        logoutUser();
+        logout();
       }
   };
 

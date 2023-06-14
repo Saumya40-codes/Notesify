@@ -8,6 +8,7 @@ import NotesListPage from './pages/NotesListPage';
 import NotePage from './pages/NotePage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './utils/PrivateRoute';
+import RegisterPage from './pages/RegisterPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <PrivateRoute path="/login" Component= {LoginPage} />
               <PrivateRoute path="/note/:id" Component = {NotePage} />
               <PrivateRoute path="/" Component={NotesListPage} />
+              <PrivateRoute path="/register" Component={RegisterPage} />
         </div>
       </div>
       </AuthProvider>

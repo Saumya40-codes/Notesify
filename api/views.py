@@ -2,13 +2,17 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import NoteSerializer,LoginSerializer
+from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.views import APIView
 from .models import Note, Login
 from django.contrib.auth import authenticate, login as login_dj
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
 
-from .utils import updateNote, deleteNote, getNoteList, getNotesList, createNote
+from .utils import updateNote, deleteNote, getNoteList, getNotesList, createNote, createUser
 
 
 
@@ -88,3 +92,26 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            validated_data['username'],
+            password=validated_data['password']
+        )
+        return user
+
+
+class UserRegistrationView(APIView):
+    def post(self, request):
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

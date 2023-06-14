@@ -2,6 +2,7 @@ from .models import Note
 from .serializers import NoteSerializer
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 
 def getNoteList(request,pk):
@@ -35,3 +36,24 @@ def createNote(request):
     note = Note.objects.create(user=user, body=data['body'])
     serializer = NoteSerializer(note, many=False)
     return Response(serializer.data)
+
+def createUser(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    if username and password:
+        # Check if the user already exists
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'error': 'Username already exists'}, status=400)
+
+        # Create a new user
+        user = User.objects.create_user(username=username, password=password)
+
+        # Customize the response as needed
+        response_data = {
+            'message': 'User registered successfully',
+            'username': user.username,
+        }
+        return JsonResponse(response_data, status=201)
+
+    return JsonResponse({'error': 'Invalid username or password'}, status=400)

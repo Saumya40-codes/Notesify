@@ -23,12 +23,11 @@ const Header = () => {
       <h1>
         <span className='lst-note'>Note List</span>
       </h1>
-      {user? (
+      {/* {user? (
         <p onClick={logout}>Logout</p>
       ):(
         <p>Login</p>
-      )}
-      <p>Hello {user &&   user.username}</p>
+      )} */}
     </div>
   );
 };
