@@ -22,8 +22,3 @@ and
 
 ### `python manage.py migrate`
 
-
-
-### o/p (currently)
-
-https://github.com/Saumya40-codes/Notesify/assets/115284013/a19fc4c4-5474-4162-a6bb-030ffecd665c
