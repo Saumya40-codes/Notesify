@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import AuthContext from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
     let {login} = useContext(AuthContext);
@@ -20,7 +21,7 @@ const LoginPage = () => {
       </div>
     </div>
     <p className='acc'>New Here?</p>
-    <a href='/register'>Get Registered</a>
+    <Link to='/reg'>Get Registered</Link>
   </form>
 </div>
   )

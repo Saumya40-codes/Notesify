@@ -45,6 +45,9 @@ const NotesListPage = () => {
         ))}
       </div>
       <AddButton />
+      {/* <footer>
+        <p onClick={logout()}>Logout</p>
+      </footer> */}
     </div>
   );
 };

@@ -21,7 +21,9 @@ function App() {
               <PrivateRoute path="/login" Component= {LoginPage} />
               <PrivateRoute path="/note/:id" Component = {NotePage} />
               <PrivateRoute path="/" Component={NotesListPage} />
-              <PrivateRoute path="/register" Component={RegisterPage} />
+              <Routes>
+              <Route path="/reg" Component={RegisterPage} />
+              </Routes>
         </div>
       </div>
       </AuthProvider>
