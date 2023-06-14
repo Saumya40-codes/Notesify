@@ -2,16 +2,18 @@ import React, { useState, useEffect, useContext } from 'react';
 import ListItem from '../components/ListItem';
 import AddButton from '../components/AddButton';
 import NotePage from './NotePage';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
 const NotesListPage = () => {
+  const navigate = useNavigate();
+
   const { user } = useContext(AuthContext);
   const [notes, setNotes] = useState([]);
-  const {authTokens, logout} = useContext(AuthContext);
+  const {authTokens, logout, login} = useContext(AuthContext);
 
   useEffect(() => {
-    getNotes();
+   authTokens ? getNotes() : navigate('/login');
   }, []);
 
   const getNotes = async () => {

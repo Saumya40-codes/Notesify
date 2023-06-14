@@ -314,21 +314,64 @@ a {
 
 /* Login */
 
-.login{
+.frm {
   background: #2e3235;
   border: none;
   color: #f68657;
   font-size: 20px;
   font-weight: 600;
-  padding: 10px;
-  width: 100px;
+  width: 400px; /* Adjust the width as needed */
   margin: 10px;
 }
 
-.login input{
+.login input {
   width: 600px;
   max-width: 900px;
   height: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.login a {
+  width: 200px;
+  margin: 10px;
+  font-size: 20px;
+  color: #f68657;
+  transition: text-decoration ease-in-out 0.2s;
+}
+
+.login a:hover {
+  text-decoration: underline;
+}
+
+.center-button, .login a, .acc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 225px;
+}
+
+.acc{
+  margin-left:-10px;
+}
+
+.btn-submit {
+  background: #f68657;
+  border: none;
+  color: #2e3235;
+  font-size: 20px;
+  font-weight: 600;
+  height: 45px;
+  margin: 10px;
+  width: 100px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+  box-shadow: 6px 6px 9px 6px rgba(233, 3, 3, 0.2);
 }
